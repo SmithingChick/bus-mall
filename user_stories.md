@@ -25,4 +25,4 @@
     <li>Ask questions</li>
 
 
-
+Note- Convert to actual statements-- "As a [title] I want to [goal] so that [desired outcome]"
