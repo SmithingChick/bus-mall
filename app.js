@@ -1,6 +1,7 @@
 'use strict';
 
-var imagePaths = ['bag.jpg', 'banana.jpg', 'scissors.jpg', 'pen.jpg'];
+var imagePaths = ['img/bag.jpg', 'img/banana.jpg', 'img/bathroom.jpg', 'img/boot.jpg', 'img/bubblegum.jpg', 'img/chair.jpg', 'img/cthulhu.jpg', 'img/dog-duck.jpg', 'img/dragon.jpg', 'img/pen.jpg', 'img/pet-sweep.jpg', 'img/scissors.jpg', 'img/shark.jpg', 'img/sweep.jpg', 'img/tauntaun.jpg', 'img/unicorn.jpg', 'img/usb.jpg', 'img/water-can.jpg', 'img/wine-glass.jpg'];
+
 var images = [];
 
 for (var i = 0; i < imagePaths.length; i++); {
@@ -16,7 +17,7 @@ drawImage();
 function clickHandler(e) {
   //clear list
   console.log(e.target);
-  //use event target to determin which image was clicked
+  //use event target to determine which image was clicked
   //add to views of all images displayed
   //add to clicks of just the clicked image
   imageList.textContent = '';
@@ -50,3 +51,10 @@ function Image(name, path) {
 
   images.push(this);
 }
+
+//Get rid of extensions with split
+// 'sweep'.png.split( )
+// ['s','w','e','e','p' ]
+// 'sweep.png'('.')
+//['sweep','png'] [0]
+// 'sweep'
