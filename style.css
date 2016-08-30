@@ -1,7 +1,8 @@
-ul {
-  style: none;
-}
 
-#images {
+
+#images.img {
   display: inline-block;
+}
+#image.li {
+  style: none;
 }

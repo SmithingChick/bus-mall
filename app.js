@@ -7,27 +7,30 @@ for (var i = 0; i < imagePaths.length; i++); {
   var name = imagePaths[i];
   new Image(null, name); //try to take image path & drop '.jpg' part
 }
+console.log(imagePaths, images);
 
 //no duplicate images
 function randomIndex(){
   var randomIndex = Math.floor(Math.random() * imagePaths.length);
   var indexOne = randomIndex;
-  var randomIndex = Math.floor(Math.random() * imagePaths.length);
+  console.log(indexOne);
+  randomIndex = Math.floor(Math.random() * imagePaths.length);
   var indexTwo = randomIndex;
+  console.log(indexTwo);
+  randomIndex = Math.floor(Math.random() * imagePaths.length);
+  var indexThree = randomIndex;
+  console.log(indexThree);
   while (indexOne === indexTwo) {
     indexTwo = randomIndex;
   }
-  var randomIndex = Math.floor(Math.random() * imagePaths.length);
-  var indexThree = randomIndex;
-  while (indexThree === indexOne || indexTwo) {
+  while ((indexThree === indexOne) || (indexThree === indexTwo)) {
     indexThree = randomIndex;
   }
-  randomIndex();
   return[indexOne, indexTwo, indexThree];
 }
+var returnValue = randomIndex();
+console.log(returnValue);
 
-
-console.log(imagePaths, images);
 //create elements
 var imageList = document.getElementById('images');
 
@@ -45,9 +48,9 @@ function drawImage() {
   li.appendChild(img);
   imageList.appendChild(li);
 }
-drawImage();  //OK, clearly not (randomIndex)
-drawImage();
-drawImage();
+drawImage(randomIndex[0]);
+drawImage(randomIndex[1]);
+drawImage(randomIndex[2]);
 
 function clickHandler(e) {
   //clear list
