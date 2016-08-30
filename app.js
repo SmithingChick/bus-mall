@@ -23,9 +23,6 @@ function randomIndex(){
     indexThree = randomIndex;
   }
   randomIndex();
-
-
-//figure this part out- needs to tell script to generate new image if matches previous-- what should randomIndex be here?
   return[indexOne, indexTwo, indexThree];
 }
 
@@ -47,9 +44,9 @@ function drawImage() {
   li.appendChild(img);
   imageList.appendChild(li);
 }
-drawImage();
-drawImage();
-drawImage();
+drawImage(randomIndex);  //OK, clearly not (randomIndex)
+drawImage(randomIndex);
+drawImage(randomIndex);
 
 function clickHandler(e) {
   //clear list
@@ -58,9 +55,9 @@ function clickHandler(e) {
   //add to views of all images displayed
   //add to clicks of just the clicked image
   imageList.textContent = '';
-  drawImage();
-  drawImage();
-  drawImage();
+  drawImage(randomIndex);
+  drawImage(randomIndex);
+  drawImage(randomIndex);
 }
 
   //set src
