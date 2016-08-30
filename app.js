@@ -26,6 +26,7 @@ function randomIndex(){
   return[indexOne, indexTwo, indexThree];
 }
 
+
 console.log(imagePaths, images);
 //create elements
 var imageList = document.getElementById('images');
@@ -44,9 +45,9 @@ function drawImage() {
   li.appendChild(img);
   imageList.appendChild(li);
 }
-drawImage(randomIndex);  //OK, clearly not (randomIndex)
-drawImage(randomIndex);
-drawImage(randomIndex);
+drawImage();  //OK, clearly not (randomIndex)
+drawImage();
+drawImage();
 
 function clickHandler(e) {
   //clear list
