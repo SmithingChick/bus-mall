@@ -1,7 +1,6 @@
 'use strict';
 
-var imagePaths = ['img/bag.jpg', 'img/banana.jpg', 'img/bathroom.jpg', 'img/boot.jpg', 'img/bubblegum.jpg', 'img/chair.jpg', 'img/cthulhu.jpg', 'img/dog-duck.jpg', 'img/dragon.jpg', 'img/pen.jpg', 'img/pet-sweep.jpg', 'img/scissors.jpg', 'img/shark.jpg', 'img/sweep.jpg', 'img/tauntaun.jpg', 'img/unicorn.jpg', 'img/usb.jpg', 'img/water-can.jpg', 'img/wine-glass.jpg'];
-
+var imagePaths = ['bag.jpg', 'banana.jpg', 'bathroom.jpg', 'boot.jpg', 'bubblegum.jpg', 'chair.jpg', 'cthulhu.jpg', 'dog-duck.jpg', 'dragon.jpg', 'pen.jpg', 'pet-sweep.jpg', 'scissors.jpg', 'shark.jpg', 'sweep.jpg', 'tauntaun.jpg', 'unicorn.jpg', 'usb.jpg', 'water-can.jpg', 'wine-glass.jpg'];
 var images = [];
 
 for (var i = 0; i < imagePaths.length; i++); {
@@ -9,8 +8,46 @@ for (var i = 0; i < imagePaths.length; i++); {
   new Image(null, name); //try to take image path & drop '.jpg' part
 }
 
+//no duplicate images
+function randomIndex(){
+  var randomIndex = Math.floor(Math.random() * imagePaths.length);
+  var indexOne = randomIndex;
+  var randomIndex = Math.floor(Math.random() * imagePaths.length);
+  var indexTwo = randomIndex;
+  while (indexOne === indexTwo) {
+    indexTwo = randomIndex;
+  }
+  var randomIndex = Math.floor(Math.random() * imagePaths.length);
+  var indexThree = randomIndex;
+  while (indexThree === indexOne || indexTwo) {
+    indexThree = randomIndex;
+  }
+  randomIndex();
+
+
+//figure this part out- needs to tell script to generate new image if matches previous-- what should randomIndex be here?
+  return[indexOne, indexTwo, indexThree];
+}
+
+console.log(imagePaths, images);
+//create elements
+var imageList = document.getElementById('images');
+
 imageList.addEventListener('click', clickHandler);
 
+function drawImage() {
+  // create elements
+  var img = document.createElement('img');
+  var li = document.createElement('li');
+  var imageList = document.getElementById('images');
+  var randomIndex = Math.floor(Math.random() * imagePaths.length);
+  var randomPath = imagePaths[randomIndex];
+  img.setAttribute('src', 'imgs/' + randomPath);
+    //add to dom
+  li.appendChild(img);
+  imageList.appendChild(li);
+}
+drawImage();
 drawImage();
 drawImage();
 
@@ -23,26 +60,10 @@ function clickHandler(e) {
   imageList.textContent = '';
   drawImage();
   drawImage();
+  drawImage();
 }
-
-function drawImage() {
-  // use image path for source
-  //(image.path)
-  // create elements
-  var img = document.createElement('img');
-  var li = document.createElement('li');
-  var imageList = document.getElementById('images');
-  var randomIndex = Math.floor(Math.random() * imagePaths.length);
-  var randomPath = imagePaths[randomIndex];
 
   //set src
-  img.setAttribute('src', 'imgs/' + randomPath);
-
-  //add to dom
-  li.appendChild(img);
-  imageList.appendChild(li);
-}
-
 function Image(name, path) {
   this.views = 0;
   this.clicks = 0;
