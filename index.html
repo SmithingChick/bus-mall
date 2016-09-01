@@ -1,15 +1,26 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <title>Bus Mall!</title>
-  </head>
-  <body>
-    <h2>Please select the item you'd like to see in the Bus Mall catalog</h2>
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <link href="https://fonts.googleapis.com/css?family=Cantarell:400,400i,700,700i|Lato:400,400i,700" rel="stylesheet">
+  <title>Bus Mall!</title>
+</head>
+
+<body>
+  <div class="image_selector">
+    <h2>Please select the items you'd like to see in the Bus Mall catalog</h2>
     <ul id="images">
     </ul>
-  <canvas id="pollResults"></canvas>
+    <button type="button" name="button" id="show_chart" class = "hidden">Show Results</button>
+  </div>
+
+  <div class="chart">
+    <canvas id="pollResults"></canvas>
+  </div>
+
   <script type="text/javascript" src="app.js"></script>
-  </body>
+</body>
+
 </html>

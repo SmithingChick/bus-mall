@@ -1,13 +1,50 @@
-ul {
-  list-style: none;
+@font-face {
+  font-family: 'Cantarell', 'Helvetica','Verdana', sans-serif;
+  font-family: 'Lato', 'Arial', sans-serif;
+  src: url(="https://fonts.googleapis.com/css?family=Cantarell:400,400i,700,700i|Lato:400,400i,700");
+}
+
+h1 h2 h3 h4 h5 h6 {
+  font-family: 'Cantarell', 'Helvetica','Verdana', sans-serif;
+  color: rgb(40,58,144);
 
 }
-ul li {
+
+p caption {
+    font-family: 'Lato', 'Arial', sans-serif;
+    color: rgb(16,23,57);
+}
+
+ul {
+  list-style: none;
+}
+
+li {
   width: 300px;
   display: inline-block;
+  margin-right: 30px;
+  border: 2px solid rgb(28,40,100);
+  border-radius: 30px;
 }
-ul li img {
-  max-width: 300px;
-  margin: 30px 50px 30px 50px;
-  outline-color: red;
+
+image_selector {
+  -moz-box-shadow:    1px 1px 3px 2px #255e1a;
+  -webkit-box-shadow: 1px 1px 3px 2px #255e1a;
+  box-shadow:         1px 1px 3px 2px #255e1a;
+  margin-bottom: 50px;
+}
+
+chart {
+  -moz-box-shadow:    1px 1px 3px 2px #283a90;
+  -webkit-box-shadow: 1px 1px 3px 2px #283a90;
+  box-shadow:         1px 1px 3px 2px #283a90;">
+}
+
+#chart {
+  width: 80%;
+  max-width: 1000px;
+}
+
+.hidden {
+    visibility: hidden;
 }
