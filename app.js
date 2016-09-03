@@ -172,11 +172,12 @@ function drawChart() {
   var chartClicks = [];
   var chartViews = [];
   for (var i = 0; i < images.length; i++) {
-    chartImages.push(images[i].imageNames);
-    chartClicks.push(images[i].imageClicks);
+    chartImages.push(images[i].name);
+    chartClicks.push(images[i].clicks);
     chartViews.push(images[i].views);
   };
-
+  console.log(images);
+console.log(ctx);
   new Chart(ctx, {
     type: 'bar',
     data: {
