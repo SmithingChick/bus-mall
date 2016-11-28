@@ -1,13 +1,12 @@
 'use strict';
 
-var imagePaths = ['bag.jpg', 'banana.jpg', 'bathroom.jpg', 'boot.jpg', 'breakfast.jpg', 'bubblegum.jpg', 'chair.jpg', 'cthulhu.jpg', 'dog-duck.jpg', 'dragon.jpg', 'pen.jpg', 'pet-sweep.jpg', 'scissors.jpg', 'shark.jpg', 'sweep.jpg', 'tauntaun.jpg', 'unicorn.jpg', 'usb.jpg', 'water-can.jpg', 'wine-glass.jpg'];
+var imagePaths = ['Bag.jpg', 'Banana.jpg', 'Bathroom.jpg', 'Boot.jpg', 'Breakfast.jpg', 'Bubblegum.jpg', 'Chair.jpg', 'Cthulhu.jpg', 'Dog-duck.jpg', 'Dragon.jpg', 'Pen.jpg', 'Pet-sweep.jpg', 'Scissors.jpg', 'Shark.jpg', 'Sweep.jpg', 'Tauntaun.jpg', 'Unicorn.jpg', 'Usb.jpg', 'Water-can.jpg', 'Wine-glass.jpg'];
 var imageJSON = localStorage.getItem('images');
 var images = JSON.parse(imageJSON);
 var currentImageIndices = [0, 1, 2];
 var totalClicks = 0; //tracks # of clicks
 
-//console.log('Local Storage Images', images);
-
+console.log('Local Storage Images', images);
 if (!images) {
   var images = [];
 
@@ -176,7 +175,7 @@ function drawChart() {
     chartViews.push(images[i].views);
   };
   console.log(images);
-console.log(ctx);
+  console.log(ctx);
   new Chart(ctx, {
     type: 'bar',
     data: {
