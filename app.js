@@ -29,7 +29,6 @@ drawImage(1);
 drawImage(2);
 
 // votes
-
 function clickHandler(event) {
   //console.log(event.target);
   if (totalClicks >= 10) {  //sets # of clicks before chart button becomes visable
