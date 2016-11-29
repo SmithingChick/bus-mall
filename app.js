@@ -13,8 +13,7 @@ if (!images) {
   for (var i = 0; i < imagePaths.length; i++) {
     var path = imagePaths[i];
     var imageName = path.split('.')[0];
-
-    new Image(imageName, path);
+    new ImageTrack(imageName, path);
   }
 }
 
@@ -29,7 +28,7 @@ drawImage(2);
 
 // votes
 function clickHandler(event) {
-  //console.log(event.target);
+  console.log(event.target);
   if (totalClicks >= 10) {  //sets # of clicks before chart button becomes visable
     var chartButton = document.getElementById('show_chart');
     chartButton.classList.remove('hidden');
@@ -41,9 +40,9 @@ function clickHandler(event) {
     var chartButton = document.getElementById('show_chart');
     chartButton.classList.remove('hidden');
     return;
-  //if (matchPath === null) {
+  // else if (matchPath === null) {
   //  alert('Click on a picture');
-  //  return;
+  //  return;}
   }
 
   var matchPath = event.target.getAttribute('src');
@@ -60,8 +59,8 @@ function clickHandler(event) {
 //use event target to determine which image was clicked
   //add to views of all images displayed
   //add to clicks of just the clicked image
-  for (var i = 0; i < images.length; i++) {
-    var currentImageObject = images[i];
+  for (var j = 0; j < images.length; j++) {
+    var currentImageObject = images[j];
     if (currentImageObject.path === matchPath) {
       currentImageObject.clicks += 1;
     };
@@ -115,7 +114,7 @@ function drawImage(index) {
   imageList.appendChild(li);
 }
 
-function Image(name, path) {
+function ImageTrack(name, path) {
   this.views = 0;
   this.clicks = 0;
   this.name = name;
@@ -135,12 +134,12 @@ chartButton.addEventListener('click', chartClickHandler);
 //correspond with values in clicks arrays
 
 //split .jpg off image names
-for (var i = 0; i < imagePaths.length; i++) {
-  var chartImageNames =  imagePaths[i].split('.')[0];
+for (var k = 0; k < imagePaths.length; k++) {
+  var chartImageNames =  imagePaths[k].split('.')[0];
 }
 
-for (var i = 0; i < voteCounter.length; i++) {
-  var chartClicksArray = voteCounter[i];
+for (var l = 0; l < voteCounter.length; l++) {
+  var chartClicksArray = voteCounter[l];
   console.log(chartClicksArray);
 }
 
@@ -169,13 +168,13 @@ function drawChart() {
   var chartImages = [];
   var chartClicks = [];
   var chartViews = [];
-  for (var i = 0; i < images.length; i++) {
-    chartImages.push(images[i].name);
-    chartClicks.push(images[i].clicks);
-    chartViews.push(images[i].views);
+  for (var m = 0; m < images.length; m++) {
+    chartImages.push(images[m].name);
+    chartClicks.push(images[m].clicks);
+    chartViews.push(images[m].views);
   };
-  console.log(images);
-  console.log(ctx);
+  // console.log(images);
+  // console.log(ctx);
   new Chart(ctx, {
     type: 'bar',
     data: {
