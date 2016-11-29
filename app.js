@@ -1,6 +1,9 @@
 'use strict';
 
-var imagePaths = ['Bag.jpg', 'Banana.jpg', 'Bathroom.jpg', 'Boot.jpg', 'Breakfast.jpg', 'Bubblegum.jpg', 'Chair.jpg', 'Cthulhu.jpg', 'Dog-duck.jpg', 'Dragon.jpg', 'Pen.jpg', 'Pet-sweep.jpg', 'Scissors.jpg', 'Shark.jpg', 'Sweep.jpg', 'Tauntaun.jpg', 'Unicorn.jpg', 'Usb.jpg', 'Water-can.jpg', 'Wine-glass.jpg'];
+var imagePaths = ['Bag.jpg', 'Banana.jpg', 'Bathroom.jpg', 'Boot.jpg', 'Breakfast.jpg',
+  'Bubblegum.jpg', 'Chair.jpg', 'Cthulhu.jpg', 'Dog-duck.jpg', 'Dragon.jpg',
+  'Pen.jpg', 'Pet-sweep.jpg', 'Scissors.jpg', 'Shark.jpg', 'Sweep.jpg',
+  'Tauntaun.jpg', 'Unicorn.jpg', 'Usb.jpg', 'Water-can.jpg', 'Wine-glass.jpg'];
 var imageJSON = localStorage.getItem('images');
 var images = JSON.parse(imageJSON);
 var currentImageIndices = [0, 1, 2];
@@ -13,6 +16,7 @@ if (!images) {
   for (var i = 0; i < imagePaths.length; i++) {
     var path = imagePaths[i];
     var imageName = path.split('.')[0];
+
     new ImageTrack(imageName, path);
   }
 }
@@ -29,20 +33,14 @@ drawImage(2);
 // votes
 function clickHandler(event) {
   console.log(event.target);
-  if (totalClicks >= 10) {  //sets # of clicks before chart button becomes visable
+
+  if (totalClicks >= 6) {  //sets # of clicks before chart button becomes visable
     var chartButton = document.getElementById('show_chart');
     chartButton.classList.remove('hidden');
     return;
-  }
-
-
-  if (totalClicks >= 6) {
-    var chartButton = document.getElementById('show_chart');
-    chartButton.classList.remove('hidden');
-    return;
-  // else if (matchPath === null) {
+  // if (matchPath === null) {
   //  alert('Click on a picture');
-  //  return;}
+  //  return;
   }
 
   var matchPath = event.target.getAttribute('src');
