@@ -1,9 +1,9 @@
 'use strict';
 
 var imagePaths = ['Bag.jpg', 'Banana.jpg', 'Bathroom.jpg', 'Boot.jpg', 'Breakfast.jpg',
-  'Bubblegum.jpg', 'Chair.jpg', 'Cthulhu.jpg', 'Dog-duck.jpg', 'Dragon.jpg',
+  'Bubblegum.jpg', 'Chair.jpg', 'Cthulhu.jpg', 'Dog-Duck.jpg', 'Dragon.jpg',
   'Pen.jpg', 'Pet-sweep.jpg', 'Scissors.jpg', 'Shark.jpg', 'Sweep.jpg',
-  'Tauntaun.jpg', 'Unicorn.jpg', 'Usb.jpg', 'Water-can.jpg', 'Wine-glass.jpg'];
+  'Tauntaun.jpg', 'Unicorn.jpg', 'USB.gif', 'Water-Can.jpg', 'Wine-Glass.jpg'];
 var imageJSON = localStorage.getItem('images');
 var images = JSON.parse(imageJSON);
 var currentImageIndices = [0, 1, 2];
