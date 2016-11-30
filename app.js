@@ -2,7 +2,7 @@
 
 var imagePaths = ['Bag.jpg', 'Banana.jpg', 'Bathroom.jpg', 'Boot.jpg', 'Breakfast.jpg',
   'Bubblegum.jpg', 'Chair.jpg', 'Cthulhu.jpg', 'Dog-Duck.jpg', 'Dragon.jpg',
-  'Pen.jpg', 'Pet-sweep.jpg', 'Scissors.jpg', 'Shark.jpg', 'Sweep.jpg',
+  'Pen.jpg', 'Pet-Sweep.jpg', 'Scissors.jpg', 'Shark.jpg', 'Sweep.jpg',
   'Tauntaun.jpg', 'Unicorn.jpg', 'USB.gif', 'Water-Can.jpg', 'Wine-Glass.jpg'];
 var imageJSON = localStorage.getItem('images');
 var images = JSON.parse(imageJSON);
