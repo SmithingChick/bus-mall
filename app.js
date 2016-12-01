@@ -8,7 +8,7 @@ var imageJSON = localStorage.getItem('images');
 var images = JSON.parse(imageJSON);
 var currentImageIndices = [0, 0, 0];
 var totalClicks = 0; //tracks # of clicks
-var totalImageShown = 0; //tracks # of times image is shown
+//var totalImageShown = 0; //tracks # of times image is shown
 
 // console.log('Local Storage Images', imagePaths);
 if (!images) {
@@ -80,6 +80,14 @@ function voteCounter() {
   return votes;
 }
 
+function imageCounter() {
+  var totalImageShown = []; //var  = 0; //tracks # of times image is shown
+  for (o = 0; o < images.length; o++) {
+    votes.push(images[o].views);
+  }
+  return totalImageShown;
+}
+
 function randomNumberGenerator() {
   return Math.floor(Math.random() * images.length);
 }
@@ -110,6 +118,8 @@ function drawImage(index) {
   var li = document.createElement('li');
   var imageList = document.getElementById('images');
   var imagePath = images[index].path;
+  images[index].views++;
+
   //set src
   img.setAttribute('src', imagePath);
   //add to dom
@@ -136,9 +146,9 @@ chartButton.addEventListener('click', chartClickHandler);
 // new arrays for click data & the names correspond with values in clicks arrays
 
 //split .jpg off image names
-for (var k = 0; k < imagePaths.length; k++) {
-  var chartImageNames =  imagePaths[k].split('.')[0];
-}
+// for (var k = 0; k < imagePaths.length; k++) {
+//   var chartImageNames =  imagePaths[k].split('.')[0];
+// }
 
 for (var l = 0; l < voteCounter.length; l++) {
   var chartClicksArray = voteCounter[l];
@@ -251,7 +261,7 @@ function drawChartViews() {
 
   for (var o = 0; o < images.length; o++) {
     imageNames.push(images[o].name);
-    imageViews.push(images[o].clicks);
+    imageViews.push(images[o].views);
   }
 
   var ctx = document.getElementById('chart_views');
