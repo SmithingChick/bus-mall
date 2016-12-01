@@ -6,17 +6,17 @@ var imagePaths = ['Bag.jpg', 'Banana.jpg', 'Bathroom.jpg', 'Boot.jpg', 'Breakfas
   'Tauntaun.jpg', 'Unicorn.jpg', 'USB.gif', 'Water-Can.jpg', 'Wine-Glass.jpg'];
 var imageJSON = localStorage.getItem('images');
 var images = JSON.parse(imageJSON);
-var currentImageIndices = [0, 1, 2];
+var currentImageIndices = [0, 0, 0];
 var totalClicks = 0; //tracks # of clicks
+var totalImageShown = 0; //tracks # of times image is shown
 
-console.log('Local Storage Images', images);
+// console.log('Local Storage Images', imagePaths);
 if (!images) {
   var images = [];
 
   for (var i = 0; i < imagePaths.length; i++) {
     var path = imagePaths[i];
     var imageName = path.split('.')[0];
-
     new ImageTrack(imageName, path);
   }
 }
@@ -34,13 +34,14 @@ drawImage(2);
 function clickHandler(event) {
   console.log(event.target);
 
-  if (totalClicks >= 6) {  //sets # of clicks before chart button becomes visable
+  if (totalClicks > 6) {  //sets # of clicks before chart button becomes visable
     var chartButton = document.getElementById('show_chart');
     chartButton.classList.remove('hidden');
     return;
-  // if (matchPath === null) {
-  //  alert('Click on a picture');
-  //  return;
+  // attempt to nix attempts to click outside of images
+  //if (matchPath === null) {
+  // alert('Click on a picture');
+  //return;
   }
 
   var matchPath = event.target.getAttribute('src');
@@ -79,16 +80,20 @@ function voteCounter() {
   return votes;
 }
 
+function randomNumberGenerator() {
+  return Math.floor(Math.random() * images.length);
+}
+
 function randomIndices(){
-  var firstRandomIndex = Math.floor(Math.random() * images.length);
-  var secondRandomIndex = Math.floor(Math.random() * images.length);
-  var thirdRandomIndex = Math.floor(Math.random() * images.length);
+  var firstRandomIndex = randomNumberGenerator();
+  var secondRandomIndex = randomNumberGenerator();
+  var thirdRandomIndex = randomNumberGenerator();
   while (currentImageIndices.indexOf(firstRandomIndex) !== -1) {
-    firstRandomIndex = Math.floor(Math.random() * images.length);
+    firstRandomIndex = randomNumberGenerator();
   }
   while (firstRandomIndex === secondRandomIndex
       || currentImageIndices.indexOf(secondRandomIndex) !== -1) {
-    secondRandomIndex = Math.floor(Math.random() * images.length);
+    secondRandomIndex = randomNumberGenerator();
   }
   while (thirdRandomIndex === firstRandomIndex
       || thirdRandomIndex === secondRandomIndex
@@ -113,10 +118,10 @@ function drawImage(index) {
 }
 
 function ImageTrack(name, path) {
-  this.views = 0;
-  this.clicks = 0;
   this.name = name;
   this.path = 'imgs/' + path;
+  this.views = 0;
+  this.clicks = 0;
 
   images.push(this);
 }
@@ -128,8 +133,7 @@ chartButton.addEventListener('click', chartClickHandler);
 //var chartClicked = false;
 
 // chart
-// new arrays for click data & the names
-//correspond with values in clicks arrays
+// new arrays for click data & the names correspond with values in clicks arrays
 
 //split .jpg off image names
 for (var k = 0; k < imagePaths.length; k++) {
@@ -147,12 +151,13 @@ function chartClickHandler() {
   var storedImages = JSON.stringify(images);
   localStorage.setItem('images', storedImages);
   drawChart();
+  drawChartViews();
   chartButton.disabled = true;
 }
 
 //It helps to draw the chart if you want the thing to show up, Smith
+// votes chart
 function drawChart() {
-    //chartClicked = true;
   var imageNames = [];
   var imageClicks = [];
 
@@ -161,76 +166,72 @@ function drawChart() {
     imageClicks.push(images[i].clicks);
   }
 
-  var ctx = document.getElementById('chart_canvas');
-  //   var ctx = document.getElementById(pollResults);
+  var ctx = document.getElementById('chart_votes');
   var chartImages = [];
   var chartClicks = [];
-  var chartViews = [];
   for (var m = 0; m < images.length; m++) {
     chartImages.push(images[m].name);
     chartClicks.push(images[m].clicks);
-    chartViews.push(images[m].views);
   };
-  // console.log(images);
-  // console.log(ctx);
+
   new Chart(ctx, {
     type: 'bar',
     data: {
       labels: chartImages,
       datasets: [{
-        label:  'Poll Results',
+        label: 'Total Votes',
         data: chartClicks,
         backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)', //5
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)', //10
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)', //15
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)', //20
+          'rgb(40,58,144)',
+          'rgb(40,58,144)',
+          'rgb(40,58,144)',
+          'rgb(40,58,144)',
+          'rgb(40,58,144)', //5
+          'rgb(40,58,144)',
+          'rgb(40,58,144)',
+          'rgb(40,58,144)',
+          'rgb(40,58,144)',
+          'rgb(40,58,144)', //10
+          'rgb(40,58,144)',
+          'rgb(40,58,144)',
+          'rgb(40,58,144)',
+          'rgb(40,58,144)',
+          'rgb(40,58,144)', //15
+          'rgb(40,58,144)',
+          'rgb(40,58,144)',
+          'rgb(40,58,144)',
+          'rgb(40,58,144)',
+          'rgb(40,58,144)', //20
         ],
-        borderColor: [
-          'rgba(255,99,132,1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)', //5
-          'rgba(255,99,132,1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)', //10
-          'rgba(255,99,132,1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)', //15
-          'rgba(255,99,132,1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)', //20
-        ],
-        borderWidth: 1,
+        // borderColor: [
+        //   'rgba(255,99,132,1)',
+        //   'rgba(54, 162, 235, 1)',
+        //   'rgba(255, 206, 86, 1)',
+        //   'rgba(75, 192, 192, 1)',
+        //   'rgba(153, 102, 255, 1)', //5
+        //   'rgba(255,99,132,1)',
+        //   'rgba(54, 162, 235, 1)',
+        //   'rgba(255, 206, 86, 1)',
+        //   'rgba(75, 192, 192, 1)',
+        //   'rgba(153, 102, 255, 1)', //10
+        //   'rgba(255,99,132,1)',
+        //   'rgba(54, 162, 235, 1)',
+        //   'rgba(255, 206, 86, 1)',
+        //   'rgba(75, 192, 192, 1)',
+        //   'rgba(153, 102, 255, 1)', //15
+        //   'rgba(255,99,132,1)',
+        //   'rgba(54, 162, 235, 1)',
+        //   'rgba(255, 206, 86, 1)',
+        //   'rgba(75, 192, 192, 1)',
+        //   'rgba(153, 102, 255, 1)', //20
+        // ],
+        // borderWidth: 1,
       }]
     },
     options: {
       title: {
-        display: true,
-        text: 'Total Votes',
+        display: false,
+//        text: 'Poll Results',
       },
       scales: {
         yAxes: [{
@@ -243,6 +244,93 @@ function drawChart() {
   });
 }
 
+// image views chart
+function drawChartViews() {
+  var imageNames = [];
+  var imageViews = [];
+
+  for (var o = 0; o < images.length; o++) {
+    imageNames.push(images[o].name);
+    imageViews.push(images[o].clicks);
+  }
+
+  var ctx = document.getElementById('chart_views');
+  var chartImages = [];
+  var chartViews = [];
+  for (var n = 0; n < images.length; n++) {
+    chartImages.push(images[n].name);
+    chartViews.push(images[n].views);
+  };
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: chartImages,
+      datasets: [{
+        label: 'Total Views',
+        data: chartViews,
+        backgroundColor: [
+          'rgb(37,94,26)',
+          'rgb(37,94,26)',
+          'rgb(37,94,26)',
+          'rgb(37,94,26)',
+          'rgb(37,94,26)', //5
+          'rgb(37,94,26)',
+          'rgb(37,94,26)',
+          'rgb(37,94,26)',
+          'rgb(37,94,26)',
+          'rgb(37,94,26)', //10
+          'rgb(37,94,26)',
+          'rgb(37,94,26)',
+          'rgb(37,94,26)',
+          'rgb(37,94,26)',
+          'rgb(37,94,26)', //15
+          'rgb(37,94,26)',
+          'rgb(37,94,26)',
+          'rgb(37,94,26)',
+          'rgb(37,94,26)',
+          'rgb(37,94,26)', //20
+        ],
+        // borderColor: [
+        //   'rgba(255,99,132,1)',
+        //   'rgba(54, 162, 235, 1)',
+        //   'rgba(255, 206, 86, 1)',
+        //   'rgba(75, 192, 192, 1)',
+        //   'rgba(153, 102, 255, 1)', //5
+        //   'rgba(255,99,132,1)',
+        //   'rgba(54, 162, 235, 1)',
+        //   'rgba(255, 206, 86, 1)',
+        //   'rgba(75, 192, 192, 1)',
+        //   'rgba(153, 102, 255, 1)', //10
+        //   'rgba(255,99,132,1)',
+        //   'rgba(54, 162, 235, 1)',
+        //   'rgba(255, 206, 86, 1)',
+        //   'rgba(75, 192, 192, 1)',
+        //   'rgba(153, 102, 255, 1)', //15
+        //   'rgba(255,99,132,1)',
+        //   'rgba(54, 162, 235, 1)',
+        //   'rgba(255, 206, 86, 1)',
+        //   'rgba(75, 192, 192, 1)',
+        //   'rgba(153, 102, 255, 1)', //20
+        // ],
+        // borderWidth: 1,
+      }]
+    },
+    options: {
+      title: {
+        display: false,
+        // text: 'Poll Results',
+      },
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true,
+          }
+        }]
+      }
+    }
+  });
+}
 
 //double-check if this code is symantically correct, general settings are correct, down to line #
 // Chart.defaults.global (
@@ -255,6 +343,3 @@ function drawChart() {
 //   maintainAspectRatio= true,
 //   //title configuration already in options
 // )
-
-
-//chartButton.disabled = true;

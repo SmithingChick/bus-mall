@@ -1,0 +1,11 @@
+'use strict';
+
+//trying to avoid duplicate images
+
+// filter (function?)
+
+this does not work:
+// rand = [2,4,6];
+// prev = [3,6,2];
+// total = [2,4,6,3,6,2];
+// unig = [2, 4, 6, 3];
