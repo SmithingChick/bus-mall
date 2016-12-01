@@ -34,7 +34,7 @@ drawImage(2);
 function clickHandler(event) {
   console.log(event.target);
 
-  if (totalClicks > 6) {  //sets # of clicks before chart button becomes visable
+  if (totalClicks >= 6) {  //sets # of clicks before chart button becomes visable
     var chartButton = document.getElementById('show_chart');
     chartButton.classList.remove('hidden');
     return;
@@ -46,12 +46,6 @@ function clickHandler(event) {
 
   var matchPath = event.target.getAttribute('src');
   var arrayOfRandomIndices = randomIndices ();
-
-  for(var i = 0; i < currentImageIndices.length; i++) {
-    var currentIndex = currentImageIndices[i];
-    var displayedObject = images[currentIndex];
-    displayedObject.views += 1;
-  }
 
   totalClicks += 1;
 
