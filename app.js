@@ -98,6 +98,7 @@ function randomIndices(){
 //seperate function or if/else loop inside randomIndices or drawImage or something?
 function previousImageIndices(){
   //figure out what to do here
+  //inside click handler function?
 }
 
 // You know what might be cool? Taking out the images as they're selected. Maybe not
