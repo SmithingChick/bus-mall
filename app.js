@@ -8,12 +8,8 @@ var imageJSON = localStorage.getItem('images');
 var images = JSON.parse(imageJSON);
 var currentImageIndices = [0, 0, 0];
 var totalClicks = 0; //tracks # of clicks
-//var totalImageShown = 0; //tracks # of times image is shown
 
-// console.log('Local Storage Images', imagePaths);
 if (!images) {
-  var images = [];
-
   for (var i = 0; i < imagePaths.length; i++) {
     var path = imagePaths[i];
     var imageName = path.split('.')[0];
@@ -45,7 +41,7 @@ function clickHandler(event) {
   }
 
   var matchPath = event.target.getAttribute('src');
-  var arrayOfRandomIndices = randomIndices ();
+  var arrayOfRandomIndices = randomIndices();
 
   totalClicks += 1;
 
@@ -74,18 +70,11 @@ function voteCounter() {
   return votes;
 }
 
-function imageCounter() {
-  var totalImageShown = []; //var  = 0; //tracks # of times image is shown
-  for (o = 0; o < images.length; o++) {
-    votes.push(images[o].views);
-  }
-  return totalImageShown;
-}
-
 function randomNumberGenerator() {
   return Math.floor(Math.random() * images.length);
 }
 
+//Setting up the 3 images
 function randomIndices(){
   var firstRandomIndex = randomNumberGenerator();
   var secondRandomIndex = randomNumberGenerator();
@@ -105,9 +94,16 @@ function randomIndices(){
   return[firstRandomIndex, secondRandomIndex, thirdRandomIndex];
 }
 
+//attempting to prevent duplicates
+//seperate function or if/else loop inside randomIndices or drawImage or something?
+function previousImageIndices(){
+  //figure out what to do here
+}
+
+// You know what might be cool? Taking out the images as they're selected. Maybe not
+//Might run out of images before the end of survey
+
 function drawImage(index) {
-  //use image path for source
-  //(image.path)
   var img = document.createElement('img');
   var li = document.createElement('li');
   var imageList = document.getElementById('images');
@@ -134,22 +130,10 @@ function ImageTrack(name, path) {
 var chartButton = document.getElementById('show_chart');
 chartButton.addEventListener('click', chartClickHandler);
 
-//var chartClicked = false;
-
-// chart
-// new arrays for click data & the names correspond with values in clicks arrays
-
-//split .jpg off image names
-// for (var k = 0; k < imagePaths.length; k++) {
-//   var chartImageNames =  imagePaths[k].split('.')[0];
-// }
-
 for (var l = 0; l < voteCounter.length; l++) {
   var chartClicksArray = voteCounter[l];
   console.log(chartClicksArray);
 }
-
-//chartClicksArray.push (chartImageNames);
 
 function chartClickHandler() {
   var storedImages = JSON.stringify(images);
@@ -296,26 +280,6 @@ function drawChartViews() {
           'rgb(37,94,26)', //20
         ],
         // borderColor: [
-        //   'rgba(255,99,132,1)',
-        //   'rgba(54, 162, 235, 1)',
-        //   'rgba(255, 206, 86, 1)',
-        //   'rgba(75, 192, 192, 1)',
-        //   'rgba(153, 102, 255, 1)', //5
-        //   'rgba(255,99,132,1)',
-        //   'rgba(54, 162, 235, 1)',
-        //   'rgba(255, 206, 86, 1)',
-        //   'rgba(75, 192, 192, 1)',
-        //   'rgba(153, 102, 255, 1)', //10
-        //   'rgba(255,99,132,1)',
-        //   'rgba(54, 162, 235, 1)',
-        //   'rgba(255, 206, 86, 1)',
-        //   'rgba(75, 192, 192, 1)',
-        //   'rgba(153, 102, 255, 1)', //15
-        //   'rgba(255,99,132,1)',
-        //   'rgba(54, 162, 235, 1)',
-        //   'rgba(255, 206, 86, 1)',
-        //   'rgba(75, 192, 192, 1)',
-        //   'rgba(153, 102, 255, 1)', //20
         // ],
         // borderWidth: 1,
       }]
@@ -336,14 +300,7 @@ function drawChartViews() {
   });
 }
 
-//double-check if this code is symantically correct, general settings are correct, down to line #
-// Chart.defaults.global (
-//   //fonts
-//   defaultFontColor= rgb(16,23,57),
-//   defaultFontFamily= 'Lato', 'Open Sans', 'Arial', sans-serif,
-//   defaultFontSize= 14,
-//   //Common Chart Configuration
-//   resposive= true,
-//   maintainAspectRatio= true,
-//   //title configuration already in options
-// )
+//Chart 3- comparing clicks vs views as bars
+//Chart 4- percentages
+//Chart 5- rank choices
+//Chart 6- joke Cthulhu chart "Are the stars right?"
