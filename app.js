@@ -34,7 +34,7 @@ function clickHandler(event) {
     var chartButton = document.getElementById('show_chart');
     chartButton.classList.remove('hidden');
     return;
-  // attempt to nix attempts to click outside of images
+  // vain attempt to nix attempts to click outside of images
   //if (matchPath === null) {
   // alert('Click on a picture');
   //return;
@@ -74,8 +74,36 @@ function randomNumberGenerator() {
   return Math.floor(Math.random() * images.length);
 }
 
-//Setting up the 3 images
+
+// //Setting up the 3 images
+// function randomIndices(){
+//   var firstRandomIndex = randomNumberGenerator();
+//   var secondRandomIndex = randomNumberGenerator();
+//   var thirdRandomIndex = randomNumberGenerator();
+//   while (currentImageIndices.indexOf(firstRandomIndex) !== -1) {
+//     firstRandomIndex = randomNumberGenerator();
+//   }
+//   while (firstRandomIndex === secondRandomIndex
+//       || currentImageIndices.indexOf(secondRandomIndex) !== -1) {
+//     secondRandomIndex = randomNumberGenerator();
+//   }
+//   while (thirdRandomIndex === firstRandomIndex
+//       || thirdRandomIndex === secondRandomIndex
+//       || currentImageIndices.indexOf(thirdRandomIndex) !== -1) {
+//     thirdRandomIndex = randomNumberGenerator();
+//   }
+//   return[firstRandomIndex, secondRandomIndex, thirdRandomIndex];
+// }
+
+//attempting to prevent duplicates
+//seperate function or if/else or do/while loop inside randomIndices or drawImage or something?
 function randomIndices(){
+  var indexes = [];
+  var uniqueIndex = [];
+  var displayIndexes = [0,0,0];
+  var newFirstRandomIndex = randomNumberGenerator();
+  var newSecondRandomIndex = randomNumberGenerator();
+  var newThirdRandomIndex = randomNumberGenerator();
   var firstRandomIndex = randomNumberGenerator();
   var secondRandomIndex = randomNumberGenerator();
   var thirdRandomIndex = randomNumberGenerator();
@@ -89,21 +117,44 @@ function randomIndices(){
   while (thirdRandomIndex === firstRandomIndex
       || thirdRandomIndex === secondRandomIndex
       || currentImageIndices.indexOf(thirdRandomIndex) !== -1) {
-    thirdRandomIndex = Math.floor(Math.random() * images.length);
+    thirdRandomIndex = randomNumberGenerator();
   }
   return[firstRandomIndex, secondRandomIndex, thirdRandomIndex];
+
+  do {
+    uniqueIndex = randomNumberGenerator();
+  } while (indexes.indexOf(uniqueIndex) !== -1
+    || displayIndexes.indexOf(uniqueIndex) !== -1);
+  indexes.push(uniqueIndex);
+  while (previousImageIndices.indexOf(newFirstRandomIndex === firstRandomIndex
+        || newFirstRandomIndex === secondRandomIndex
+        || newFirstRandomIndex === thirdRandomIndex
+        || currentImageIndices.indexOf(newThirdRandomIndex) !== -1)) {
+    newFirstRandomIndex = randomNumberGenerator();
+  }
+  while (newSecondRandomIndex === newFirstRandomIndex
+      || currentImageIndices.indexOf(newFirstRandomIndex) !== -1) {
+    newSecondRandomIndex = randomNumberGenerator();
+  }
+  while (newThirdRandomIndex === newFirstRandomIndex
+      || newThirdRandomIndex === newSecondRandomIndex
+      || currentImageIndices.indexOf(newThirdRandomIndex) !== -1) {
+    newThirdRandomIndex = randomNumberGenerator();
+  }
+  return[newFirstRandomIndex, newSecondRandomIndex, newThirdRandomIndex];
+
+  for (var i = 0; i < 3; i++) {
+    do {
+      uniqueIndex = randomNumberGenerator();
+    } while (indexes.indexOf(uniqueIndex) !== -1
+      || displayIndexes.indexOf(uniqueIndex) !== -1);
+    indexes.push(uniqueIndex);
+  }
+  return indexes;
 }
+randomIndices();
 
-//attempting to prevent duplicates
-//seperate function or if/else loop inside randomIndices or drawImage or something?
-function previousImageIndices(){
-  //figure out what to do here
-  //inside click handler function?
-}
-
-// You know what might be cool? Taking out the images as they're selected. Maybe not
-//Might run out of images before the end of survey
-
+//sets up images as list items & displays them
 function drawImage(index) {
   var img = document.createElement('img');
   var li = document.createElement('li');
@@ -144,8 +195,7 @@ function chartClickHandler() {
   chartButton.disabled = true;
 }
 
-//It helps to draw the chart if you want the thing to show up, Smith
-// votes chart
+// create votes chart
 function drawChart() {
   var imageNames = [];
   var imageClicks = [];
@@ -233,7 +283,7 @@ function drawChart() {
   });
 }
 
-// image views chart
+//Create image views chart
 function drawChartViews() {
   var imageNames = [];
   var imageViews = [];
